@@ -6,6 +6,7 @@
     <title>Yourk Study Buddy - Resources</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="../script.js"></script>
 </head>
 <body>
     <div class="navbar">
@@ -16,6 +17,18 @@
             <a href="Tracker.html">Personal Tracker</a>
         </div>
     </div>
+    <div class="search">
+        <input type="text" placeholder="Courses..">
+        <input type="text" placeholder="Term..">
+        <div class="search-buttons">
+            <button onclick="findCourse()">Search</button>
+            <button>Track</button>
+        </div>
+        <p id="error"></p>
+        
+    </div>
+        
 
+    </div>
 </body>
 </html>
