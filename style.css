@@ -24,7 +24,7 @@
 }
 .navbar-links {
     display: flex;
-    padding: 0 25%;
+    padding: 0 33%;
     
 }
 .navbar-links a {
@@ -74,11 +74,12 @@
 
 
 .search {
-    margin: 5% auto;
+    margin: 2% auto;
     border: solid black 2px;
     border-radius: 20px;
     width: 60%;
-    padding: 5%;
+    padding: 5% 5% 0 5%;
+    justify-content: center;
 
 }
 .search input[type=text] {
@@ -86,19 +87,15 @@
     font-weight: bold;
     padding: 15px;
     border: none;
-    width: 90%;
+    width: 96%;
     font-size: 15px;
     border-radius: 5px;
     background-color: #E1DFDC;
     margin: 5px 0px;
 }
 .search-buttons {
-    bottom: 10%;
-    height: fit-content;
-    width: 93%;
     display:flex;
     justify-content:space-between;
-    transform: translateY(50%);
 }
 .search button {
     font-family: 'Montserrat', sans-serif;
@@ -118,8 +115,32 @@
 }
 
 #error {
-    margin: 5% 0;
     color: lightcoral;
     font-family: 'Montserrat', sans-serif;
     height: auto;
+}
+
+.courses {
+    width: auto;
+    display: flex;
+    gap: 5%;
+    justify-content: center;
+    margin: 1% 5%;
+}
+.courses .sub {
+    font-family: 'Montserrat', sans-serif;
+    border: black solid 2px;
+    border-radius: 10px;
+    text-align: left;    
+    padding: 2%;
+    font-size: 14px;
+    height: 250px;
+    width: 550px;
+}
+.courses .sub a,p {
+    display: block;
+    position: inherit;
+}
+#title {
+    font-weight: 700;
 }
