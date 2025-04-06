@@ -49,7 +49,9 @@ async function findCourse(track, searchQuery = null) {
     } else {
         error.innerHTML = errorMsg;
     }
-
+    document.getElementById("lesson3").scrollIntoView({
+        behavior: "smooth"
+    });
     // Return true/false if cours found
     return flag;
 }
