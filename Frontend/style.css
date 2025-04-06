@@ -1,0 +1,212 @@
+.navbar {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    display: flex;    
+}
+
+.navbar a {
+    text-decoration: none;
+    color: gray;
+    white-space: nowrap;
+
+}
+.navbar .active {
+    color: black;
+    text-decoration: underline;
+}
+.navbar p {
+    margin: 0;
+    padding: 5px 20px;
+    white-space: nowrap;
+}
+.navbar-links {
+    display: flex;
+    padding: 0 33%;
+    
+}
+.navbar-links a {
+    padding: 10px;
+    transition: color 1s ease;
+}
+.navbar-links a:hover {
+    color: black;
+}
+
+
+
+.home-main {
+    padding: 10% 33%;
+    display: flex;   
+    text-align: center; 
+    justify-content: space-between; 
+    align-items: center;  
+}
+.home-main img {
+    margin: 0%;
+    width: 50%;
+    height: 50%; 
+    max-width: 100%;  
+    flex-shrink: 0;  
+}
+.text-container {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column; 
+}
+.text-container p {
+    padding: 0 10px;
+    max-width: 1500px;
+}
+.text-container h1 {
+    max-width: 1500px;
+}
+
+.text-container a {
+    cursor: pointer;
+    background-color: #E31837;
+    border: solid black 1px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0 auto;
+    text-decoration: none;
+    color: black;
+    padding: 9px 0px;
+    width: 40%;
+    
+    transition: background-color 0.3s ease;
+}
+.text-container a:hover {
+    background-color: #AF001A;
+}
+
+
+.search {
+    margin: 2% auto;
+    border: solid black 2px;
+    border-radius: 20px;
+    width: 60%;
+    padding: 5% 5% 0 5%;
+    justify-content: center;
+
+}
+.search input[type=text] {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    width: 96%;
+    font-size: 15px;
+    border-radius: 5px;
+    background-color: #E1DFDC;
+    margin: 5px 0px;
+}
+.search-buttons {
+    display:flex;
+    justify-content:space-between;
+}
+.search button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    margin: 5% 0%;
+    padding: 15px;
+    width: 25%;
+    border: black solid 2px;
+    font-size: 15px;
+    background-color: #E31837;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search button:hover {
+    background-color: #AF001A;
+}
+
+#error {
+    color: lightcoral;
+    font-family: 'Montserrat', sans-serif;
+    height: auto;
+}
+
+.courses {
+    width: auto;
+    display: flex;
+    gap: 5%;
+    justify-content: center;
+    margin: 1% 5%;
+}
+.courses .sub {
+    background-color: #D6CFCA;
+    font-family: 'Montserrat', sans-serif;
+    border: black solid 2px;
+    border-radius: 10px;
+    text-align: left;    
+    padding: 2%;
+    font-size: 14px;
+    height: 250px;
+    width: 550px;
+}
+.courses .sub a,p {
+    display: block;
+    position: inherit;
+}
+#title {
+    font-weight: 700;
+}
+
+
+
+#courseTitle {
+    font-family: 'Montserrat', sans-serif;
+    padding: 0% 5%;
+}
+
+.lesson {
+    padding: 1% 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.lesson h3 {
+    color: white;
+    font-weight: 200;
+    padding: 10px 200px; 
+    margin: 0; 
+    border-radius: 5px; 
+    background-color: #E31837;
+    transition: background-color 0.3s ease, width 0.3s ease;
+    width: 200px; 
+    height: auto; 
+    text-align: left;
+}
+.lesson h3:hover {
+    background-color: #AF001A;
+}
+
+#sub-boxes {
+    position: absolute;
+    left: 60%;
+    display: flex;
+    justify-content: space-between; 
+    
+}
+#sub-box-1, #sub-box-2 {
+    width: 200px; 
+    height: 100px; 
+    background-color: #f4f4f4;
+    overflow: hidden; 
+    padding: 5%;
+}
+.lesson a {
+    color: #3AC2EF;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+
