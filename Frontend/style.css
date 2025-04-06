@@ -92,7 +92,7 @@
     justify-content: center;
 
 }
-.search input[type=text] {
+.search input {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     padding: 15px;
@@ -193,7 +193,7 @@
     left: 60%;
     display: flex;
     justify-content: space-between; 
-    
+    gap: 150px;
 }
 #sub-box-1, #sub-box-2 {
     width: 200px; 
@@ -201,12 +201,18 @@
     background-color: #f4f4f4;
     overflow: hidden; 
     padding: 5%;
+    min-height: 120px;
 }
 .lesson a {
     color: #3AC2EF;
     font-size: 14px;
     font-weight: 500;
     text-decoration: underline;
+}
+.lesson input {
+    color: black;
+    font-size: 12px;
+    font-weight: 300;
 }
 
 
