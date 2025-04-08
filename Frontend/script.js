@@ -36,8 +36,9 @@ async function findCourse(track, searchQuery = null) {
     // If course found then continue
     if (flag) {
         if (track) {
-            // Create array to store course
-            if (localStorage.getItem(foundCourse.title) == null) {
+            // Check if tracking
+            const trackedCourse = await getTrackedCourseByTitle(foundCourse.title);
+            if (trackedCourse == null) {
                 if (term.length < 1) {
                     term = "N/A";
                 }
@@ -53,13 +54,9 @@ async function findCourse(track, searchQuery = null) {
                             {name: foundCourse.lessons[2].name, video: false, textbook: false}
                         ]
                     }
-                // Store data locally
-                if (localStorage.getItem(foundCourse.title) == null) {
-                    localStorage.setItem(foundCourse.title,JSON.stringify(courseItems));
-                }
                 // Display course (track button)
                 result.innerHTML = displayCourse(foundCourse);
-                console.log(localStorage.getItem(foundCourse.title))
+                sendTrackedCourseToServer(courseItems); // Send to backend
             } else {
                 error.innerHTML = "You are tracking this course already";
             }
@@ -76,6 +73,42 @@ async function findCourse(track, searchQuery = null) {
     });
     // Return true/false if course found
     return flag;
+}
+
+async function sendTrackedCourseToServer(course) {
+    const response = await fetch('http://localhost:3000/track', {
+        method: 'POST',
+        body: JSON.stringify(course),
+        headers: {
+            'Content-Type': 'application/json'  // Set content type to JSON
+        }
+    });
+    const data = await response.json();
+    console.log(data);
+}
+
+async function getTrackedCoursesFromServer() {
+    const response = await fetch('http://localhost:3000/tracked');
+    const data = await response.json();
+    return data;
+}
+
+async function getTrackedCourseByTitle(name) {
+    const trackedCourses = await getTrackedCoursesFromServer();
+    console.log("Tracked courses:", trackedCourses);
+    if (!trackedCourses || trackedCourses.length == 0) {
+        console.log('No courses found.');
+        return null; 
+    }
+    for (const course of trackedCourses) {
+        if (course.title == name) {
+            console.log('course found.');
+            return course;
+           
+        }
+    }
+    console.log('No courses found.');
+    return null;
 }
 
 // Pre: course is an array element
@@ -114,24 +147,26 @@ async function displayLesson(num, element) {
     const courses = await getCourses();  
     var check1 = ``;
     var check2 = ``;
+    // Find the course given the list of courses
     for (var course of courses) {
         if (course.title.trim().toLowerCase() == name.trim().toLowerCase()) {
             break;
         }
     }
-    if (localStorage.getItem(course.title) != null) {
-        const courseDetails = JSON.parse(localStorage.getItem(course.title));
-        console.log(courseDetails.lessons)
-        if (courseDetails.lessons[num].textbook) {
+    // Check if user is tracking the course, if they are then display checkmark boxes
+    const trackedCourse = await getTrackedCourseByTitle(course.title);
+    if (trackedCourse != null) {
+        if (trackedCourse.lessons[num].textbook) {
             isCompleted1 = "checked";
         }  
-        if (courseDetails.lessons[num].video) {
+        if (trackedCourse.lessons[num].video) {
             isCompleted2 = "checked";
         }
         check1 = `<input id="check-lesson1" type="checkbox" onclick="completeLesson(this)" data-lesson="${num}" data-type="textbook" ${isCompleted1}>Completed?`;
         check2 = `<input id="check-lesson2" type="checkbox" onclick="completeLesson(this)" data-lesson="${num}" data-type="video" ${isCompleted2}>Completed?`;
     }
 
+    // Using the course found from the list, display lessons
     textbook.innerHTML = `<p>Textbook Link<p>
                             <a id="sub-box-1-link" href="${course.lessons[num].textbook}">${course.lessons[num].textbook}</a>
                             <br>
@@ -142,7 +177,7 @@ async function displayLesson(num, element) {
                         <a id="sub-box-2-link" href="${course.lessons[num].video}">${course.lessons[num].video}</a>
                             <br>
                             <br>
-                            ${check1}
+                            ${check2}
                         `;
 
     document.getElementById("lesson1").style.width = "200px"
@@ -152,14 +187,16 @@ async function displayLesson(num, element) {
     element.style.width = "500px";
 }
 
+
 // Pre: element is the clicked upon lesson
 // Post: store checkbox value into localstorage
-function completeLesson(element) {
+async function completeLesson(element) {
     var name = document.getElementById("courseTitle").textContent.trim();
     var lessonNum = Number(element.dataset.lesson); 
     var type = element.dataset.type;
-    if (localStorage.getItem(name) != null) {
-        var courseDetails = JSON.parse(localStorage.getItem(name))
+
+    const courseDetails = await getTrackedCourseByTitle(name);
+    if (courseDetails != null) {
         console.log(courseDetails);
         if (type == "textbook") {
             courseDetails.lessons[lessonNum].textbook = true;
@@ -167,22 +204,23 @@ function completeLesson(element) {
         if (type == "video") {
             courseDetails.lessons[lessonNum].video = true;
         }
-        localStorage.setItem(name,JSON.stringify(courseDetails))
+        sendTrackedCourseToServer(courseDetails); // Send to backend, update
     }
 }
 
 
 // Tracker page functions:
 
-// Displays user's tracked courses from localStorage
-function displayTrackedCourses() {
+// Displays user's tracked courses from backend data
+async function displayTrackedCourses() {
     var section = document.getElementById("tracker-container");
     var content = ``;
     var lessons = ``;
     var totalCompletion = 0;
-    for (let i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        var course = JSON.parse(localStorage.getItem(key))
+    const trackedCourses = await getTrackedCoursesFromServer();
+    console.log(trackedCourses);
+    for (let i = 0; i < trackedCourses.length; i++) {
+        var course = trackedCourses[i]
         lessons = ``;
         for (let j = 0; j < course.lessons.length; j++) {
             var lessonCompletion = 0;
@@ -224,32 +262,29 @@ function displayTrackedCourses() {
         
         `
     }
-    if (localStorage.length == 0) {
+    if (trackedCourses.length == 0) {
         content += `<h1>You are not tracking any courses!</h1>`;
     }
     section.innerHTML = content;
-    // Get course
 }
 
-// Change grade, update localStorage
-function updateGrade() {
+// Change grade, update backend
+async function updateGrade() {
     var name = document.getElementById("tracker-name").textContent.split('(')[0].trim();
     var value = Number(document.getElementById("tracker-grade").value);
-    var courseDetails = JSON.parse(localStorage.getItem(name));
-    console.log(value)
-    courseDetails.grade = value;
-    localStorage.setItem(name, JSON.stringify(courseDetails))
-
-    // Translate from york scale
-
-
+    var trackedCourse = await getTrackedCourseByTitle(name);
+    trackedCourse.grade = value;
+    sendTrackedCourseToServer(trackedCourse); // Update course
 }
-// Delete course tracked from localStorage
-function removeCourse() {
+// Delete course tracked from backend
+async function removeCourse() {
     console.log("delete")
     var name = document.getElementById("tracker-name").textContent.split('(')[0].trim();
-    localStorage.removeItem(name);
+    const response = await fetch(`http://localhost:3000/track/${name}`, {
+        method: 'DELETE',
+    });    
     displayTrackedCourses();
+    return response;
 }
 
 // Get course data from server

@@ -37,3 +37,56 @@ const courses = [
       ]
     }
   ];
+
+let userCourses = []; 
+
+// GET endpoint to fetch tracked courses
+app.get('/tracked', (req, res) => {
+  res.json(userCourses);
+});
+
+// POST Storing user data
+app.post('/track', (req, res) => {
+    const newCourse = req.body;
+    let exists = false;
+
+    // Search if course exists
+    for (let i = 0; i < userCourses.length; i++) {
+        console.log(userCourses[i].title + "==" + newCourse.title)
+        if (userCourses[i].title == newCourse.title) {
+            exists = true;  
+            userCourses[i] = newCourse;
+            break;  
+        }
+    }
+    // If it doesnt exist add course to user's tracked list + confirmation
+    if (!exists) {
+      userCourses.push(newCourse);
+      res.json({ message: "Course tracked successfully", data: userCourses });
+    } else {
+      res.json({ message: "Course updated successfully", data: userCourses });
+    }
+});
+
+// Deleting a course
+app.delete('/track/:title', (req, res) => {
+  const courseTitle = req.params.title;  
+  let exists = false;  
+
+  // Find the index of the course to be deleted
+  for (let i = 0; i < userCourses.length; i++) {
+    if (userCourses[i].title === courseTitle) {
+        exists = true;  
+        userCourses.splice(i, 1); 
+        break;  
+    }
+  }
+  // Confirmation
+  if (exists) {
+    res.json({ message: "Course deleted successfully", data: userCourses });
+  } else {
+    res.status(404).json({ message: "Course not found" });
+  }
+});
+
+
