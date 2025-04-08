@@ -3,9 +3,11 @@ const app = express(); // Starting an app
 const cors = require('cors'); // unblock CORS policy
 const port = 3000; // Port
 
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`)
-});
+if (require.main === module) {
+  app.listen(port, () => {
+      console.log(`Server is running at http://localhost:${port}`)
+  });
+}
 
 app.use(cors());
 app.use(express.json())
@@ -13,6 +15,8 @@ app.use(express.json())
 app.get('/',(req, res) => {
   res.json(courses);
 });
+
+module.exports = app;
 
 
 const courses = [
