@@ -3,22 +3,28 @@ const app = express(); // Starting an app
 const cors = require('cors'); // unblock CORS policy
 const port = 3000; // Port
 
+
+module.exports = app; // Testing
+
 if (require.main === module) {
   app.listen(port, () => {
       console.log(`Server is running at http://localhost:${port}`)
   });
 }
 
+// Browser pass
 app.use(cors());
+
+// Middle man
 app.use(express.json())
 
+// GET all courses available
 app.get('/',(req, res) => {
   res.json(courses);
 });
 
-module.exports = app;
 
-
+// Database of courses available
 const courses = [
     {
       title: "SC MATH 1019 Discrete Math",
@@ -40,7 +46,7 @@ const courses = [
 
 let userCourses = []; 
 
-// GET endpoint to fetch tracked courses
+// GET tracked courses
 app.get('/tracked', (req, res) => {
   res.json(userCourses);
 });
