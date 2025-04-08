@@ -194,14 +194,13 @@ function displayTrackedCourses() {
             
             lessons += `<h3>${course.lessons[j].name} <span>${lessonCompletion}%</span></h3>`;
         }
-
         content += `<div class="tracker-box">
                         <div class="tracker-content">
                             <div class="tracker-sub-content">
                                 <h3 id="tracker-name">${course.title} (T: ${course.term})</h3>
                                 
                                 <h4>My Grade</h4>
-                                <input id="tracker-grade" onchange="updateGrade()" size="10" type="number" min="0" max="100" value="${course.grade}">%
+                                <input id="tracker-grade" onchange="updateGrade()" size="10" type="number" min="0" max="100" value="${course.grade}"> %
                             </div>
                             
                             <div class="tracker-sub-content" id="tracker-grade-row">    
@@ -220,6 +219,9 @@ function displayTrackedCourses() {
                     </div>
         
         `
+    }
+    if (localStorage.length == 0) {
+        content += `<h1>You are not tracking any courses!</h1>`;
     }
     section.innerHTML = content;
     // Get course
