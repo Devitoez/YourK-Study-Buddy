@@ -52,7 +52,6 @@ app.post('/track', (req, res) => {
 
     // Search if course exists
     for (let i = 0; i < userCourses.length; i++) {
-        console.log(userCourses[i].title + "==" + newCourse.title)
         if (userCourses[i].title == newCourse.title) {
             exists = true;  
             userCourses[i] = newCourse;

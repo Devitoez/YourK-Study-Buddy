@@ -278,7 +278,6 @@ async function updateGrade() {
 }
 // Delete course tracked from backend
 async function removeCourse() {
-    console.log("delete")
     var name = document.getElementById("tracker-name").textContent.split('(')[0].trim();
     const response = await fetch(`http://localhost:3000/track/${name}`, {
         method: 'DELETE',
