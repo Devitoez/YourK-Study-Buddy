@@ -112,6 +112,8 @@ async function displayLesson(num, element) {
     const textbook = document.getElementById("sub-box-1")
     const video = document.getElementById("sub-box-2");
     const courses = await getCourses();  
+    var check1 = ``;
+    var check2 = ``;
     for (var course of courses) {
         if (course.title.trim().toLowerCase() == name.trim().toLowerCase()) {
             break;
@@ -126,19 +128,21 @@ async function displayLesson(num, element) {
         if (courseDetails.lessons[num].video) {
             isCompleted2 = "checked";
         }
+        check1 = `<input id="check-lesson1" type="checkbox" onclick="completeLesson(this)" data-lesson="${num}" data-type="textbook" ${isCompleted1}>Completed?`;
+        check2 = `<input id="check-lesson2" type="checkbox" onclick="completeLesson(this)" data-lesson="${num}" data-type="video" ${isCompleted2}>Completed?`;
     }
 
     textbook.innerHTML = `<p>Textbook Link<p>
                             <a id="sub-box-1-link" href="${course.lessons[num].textbook}">${course.lessons[num].textbook}</a>
                             <br>
                             <br>
-                            <input id="check-lesson1" type="checkbox" onclick="completeLesson(this)" data-lesson="${num}" data-type="textbook" ${isCompleted1}>Completed?
+                            ${check1}
                         `;
     video.innerHTML = `<p>Video Link<p>
                         <a id="sub-box-2-link" href="${course.lessons[num].video}">${course.lessons[num].video}</a>
                             <br>
                             <br>
-                            <input id="check-lesson2" type="checkbox" onclick="completeLesson(this)" data-lesson="${num}" data-type="video" ${isCompleted2}>Completed?
+                            ${check1}
                         `;
 
     document.getElementById("lesson1").style.width = "200px"
