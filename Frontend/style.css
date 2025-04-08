@@ -131,7 +131,6 @@
 }
 
 .courses {
-    width: auto;
     display: flex;
     gap: 5%;
     justify-content: center;
@@ -215,4 +214,101 @@
     font-weight: 300;
 }
 
+
+#tracker-container {
+    display: flex;
+    margin: 2%;
+    font-family: 'Montserrat', sans-serif;
+    justify-content: flex-start;
+    gap: 5%;
+    flex-wrap: wrap;
+}
+.tracker-box {
+    border: black solid 2px;
+    border-radius: 5%;
+    padding: 0 0 25px 25px;
+}
+.tracker-content {
+    flex: 0 5% 0%;
+    padding: 5px 25px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: fit-content;
+}
+#tracker-name {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 70%;
+}
+
+.tracker-sub-content#tracker-grade-row {
+    padding: 65px 0;
+}
+#tracker-grade-row div {
+    background-color: #E31837;
+    border: black solid 1px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 9%;
+    font-weight: 500;
+}
+#tracker-grade {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    background-color: #E1DFDC;
+    border: black solid 1px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 30px;
+}
+.tracker-lessons {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 10px;
+    margin:  0;
+}
+.tracker-lessons h3 {
+    color: white;
+    text-overflow: hidden;
+    font-weight: 200;
+    font-size: 16px;
+    padding: 8px 80px; 
+    margin: 0%; 
+    background-color: #E31837;
+    width: 210px; 
+    border-radius: 4px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+.tracker-lessons span {
+    font-weight: 500;
+}
+.tracker-lessons a {
+    text-align: left;
+}
+.tracker-buttons {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+    border: black solid 1px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 1.5% 2% ;
+}
+
+.tracker-buttons:hover {
+    background-color: #D6CFCA;
+}
+#delete-button {
+    padding-left: 25px;
+}
 

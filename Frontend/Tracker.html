@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="displayTrackedCourses()">
     <div class="navbar">
         <p class="navbar">YourK Study Buddy</p>
         <div class="navbar-links">
@@ -16,8 +16,8 @@
             <a class="active" href="Tracker.html">Personal Tracker</a>
         </div>
     </div> 
-    <div id="tracked-content" onload="loadCourses()">
-
+    <div id="tracker-container">
+        <!--Courses load here from function -->
     </div>
     <script src="./script.js"></script>
 </body>

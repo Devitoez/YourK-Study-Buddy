@@ -19,9 +19,9 @@ const courses = [
     {
       title: "SC MATH 1019 Discrete Math",
       lessons: [
-        { name: "Propositional Logic", textbook: "Textbook link", video: "Video" },
-        { name: "Set Theory", textbook: "Textbook link", video: "Video" },
-        { name: "Big O Notation", textbook: "Textbook link", video: "Video" }
+        { name: "Propositional Logic", textbook: "Textbook link ", video: "Video1 " },
+        { name: "Set Theory", textbook: "Textbook link 2", video: "Video 2" },
+        { name: "Big O Notation", textbook: "Textbook link 3", video: "Video 3" }
       ]
     },
     {
